@@ -25,7 +25,7 @@ public class Employee {
     @Column(name = "date_of_joining")
     private Date doj;
 
-    @Column(name = "")
+    @Column(name = "salary")
     private Double salary;
 
     /*@Getter,@Setter*/
