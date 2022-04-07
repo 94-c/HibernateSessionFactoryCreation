@@ -1,6 +1,8 @@
 package com.infotech.client;
 
 import com.infotech.entity.Employee;
+import com.infotech.service.EmployeeService;
+import com.infotech.service.impl.EmployeeServiceImpl;
 import com.infotech.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -11,64 +13,35 @@ public class ClientTest {
 
     public static void main(String[] args) {
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            /*String SQL = "SELECT VERSION()";
-            String result = (String) session.createNativeQuery(SQL).getSingleResult();
-            System.out.println("MY SQL version is :: ");
-            System.out.println(result);*/
+            EmployeeService employeeService = new EmployeeServiceImpl();
+            //createEmployee(employeeService);
+            //getEmployeeById(employeeService);
+            //updateEmployeeById(employeeService);
+            deleteEmployeeById(employeeService);
 
-            deleteEmployeeById(session);
-
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        }
     }
 
-    private static void deleteEmployeeById(Session session) {
-        Employee employee = session.get(Employee.class, 12);
-        if(employee != null){
-            session.beginTransaction();
+    private static void deleteEmployeeById(EmployeeService employeeService) {
+        employeeService.deleteEmployeeById(13);
+    }
+    private static void updateEmployeeById(EmployeeService employeeService) {
+        employeeService.updateEmployeeById(14, 60000.00);
 
-            session.delete(employee);
-            session.getTransaction().commit();
-        }else{
-            System.out.println("Employee doesn't exist with provideded Id..");
-        }
     }
 
-    private static void updateEmployeeById(Session session) {
-        Employee employee = session.get(Employee.class, 12);
-        if(employee != null){
-            employee.setSalary(40000.00);
-            session.beginTransaction();
-
-            session.update(employee);
-            session.getTransaction().commit();
-        }else{
-            System.out.println("Employee doesn't exist with provideded Id..");
-        }
+    private static void getEmployeeById(EmployeeService employeeService) {
+        Employee employee = employeeService.getEmployeeById(14);
+        System.out.println("아이디 조회 : " + employee);
     }
 
-    private static void getEmployeeById(Session session) {
-        Employee employee = session.get(Employee.class, 12);
-        if (employee != null) {
-            System.out.println(employee);
-        }else {
-            System.out.println("Employee doesn't exist with provideded Id.. ");
-        }
-    }
-
-    private static void createEmployee(Session session) {
-        session.beginTransaction();
-        Integer id =(Integer) session.save(getEmployee());
-        System.out.println("Employee is created  with Id::"+id);
-        session.getTransaction().commit();
+    private static void createEmployee(EmployeeService employeeService) {
+        employeeService.createEmployee(getEmployee());
     }
 
     private static Employee getEmployee(){
         Employee employee= new Employee();
-        employee.setEmployeeName("hyeongwoo");
-        employee.setEmail("hyeongwoo26@outlook.kr");
+        employee.setEmployeeName("최형우");
+        employee.setEmail("hyeongwoo26@1231412.kr");
         employee.setSalary(80000.00);
         employee.setDoj(new Date());
         return employee;

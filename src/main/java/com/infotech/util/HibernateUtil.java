@@ -5,10 +5,6 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Environment;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class HibernateUtil {
 
@@ -40,7 +36,7 @@ public class HibernateUtil {
         if (sessionFactory == null){
             try{
                 // Create StandardServiceRegistry
-                standardServiceRegistry = new StandardServiceRegistryBuilder().configure("myconfig.cfg.xml").build();
+                standardServiceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 
                 // Create MetadataSources
                 MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
