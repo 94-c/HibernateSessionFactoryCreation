@@ -12,14 +12,15 @@ import java.util.Date;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "empid_generator")
+    @SequenceGenerator(name = "empid_generator", initialValue = 1, allocationSize = 1, sequenceName = "empid_seq")
     private Integer employeeId;
 
     @Column(name = "employee_name", length = 100, nullable = false)
     private String employeeName;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "date_of_joining")
