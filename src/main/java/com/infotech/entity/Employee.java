@@ -1,11 +1,16 @@
 package com.infotech.entity;
 
 
-import com.infotech.model.Address;
+import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "employee_table")
@@ -26,22 +31,13 @@ public class Employee {
     @Column(name = "date_of_joining")
     private Date doj;
 
-    @Embedded
-    private Address address;
-
     @Column(name = "salary")
     private Double salary;
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+    @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    private List<Address> addressList = new ArrayList<>();
 
     /*@Getter,@Setter*/
-
     public Integer getEmployeeId() {
         return employeeId;
     }
@@ -80,5 +76,25 @@ public class Employee {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public List<Address> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", employeeName='" + employeeName + '\'' +
+                ", email='" + email + '\'' +
+                ", doj=" + doj +
+                ", salary=" + salary +
+                ", addressList=" + addressList +
+                '}';
     }
 }
