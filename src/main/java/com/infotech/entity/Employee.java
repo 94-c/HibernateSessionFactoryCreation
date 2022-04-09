@@ -3,17 +3,20 @@ package com.infotech.entity;
 
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jdk.nashorn.internal.objects.annotations.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "employee_table")
+@DynamicUpdate
 public class Employee {
 
     @Id
     @Column(name = "employee_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empid_generator")
+    @SequenceGenerator(name = "empid_generator", initialValue = 1, allocationSize = 1, sequenceName = "empid_seq")
     private Integer employeeId;
 
     @Column(name = "employee_name", length = 100, nullable = false)
