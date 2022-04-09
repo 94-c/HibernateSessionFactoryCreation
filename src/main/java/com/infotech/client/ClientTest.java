@@ -1,6 +1,7 @@
 package com.infotech.client;
 
 import com.infotech.entity.Employee;
+import com.infotech.model.Address;
 import com.infotech.service.EmployeeService;
 import com.infotech.service.impl.EmployeeServiceImpl;
 import com.infotech.util.HibernateUtil;
@@ -44,6 +45,13 @@ public class ClientTest {
         employee.setEmail("hyeongwoo26@1231412.kr");
         employee.setSalary(80000.00);
         employee.setDoj(new Date());
+
+        Address address = new Address();
+        address.setCity("인천");
+        address.setPincode(1234567L);
+        address.setState("남동구");
+        address.setStreet("만수동");
+        employee.setAddress(address);
         return employee;
     }
 
