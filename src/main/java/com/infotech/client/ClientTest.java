@@ -40,8 +40,8 @@ public class ClientTest {
 
     private static Employee getEmployee(){
         Employee employee= new Employee();
-        employee.setEmployeeName("우광우");
-        employee.setEmail("wookw@1231412.kr");
+        employee.setEmployeeName("최형우");
+        employee.setEmail("hyeongwoo26@1231412.kr");
         employee.setSalary(80000.00);
         employee.setDoj(new Date());
         return employee;
